@@ -103,6 +103,9 @@ describe('Launch Browser', () => {
         });
         const context = browser.newContext();
         const page =  await (await context).newPage();
+
+        send1("helllo");
+        
         await page.goto('https://letcode.in/');
         console.log(await page.locator('p.subtitle:nth-child(2)').textContent());
         await page.getByRole('link', { name: 'Log in' }).click();
