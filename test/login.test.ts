@@ -79,9 +79,9 @@ describe('Launch Browser', () => {
     // })
 
 
-    test ("amazon", async () => {
+    xtest ("amazon", async () => {
         const browser = await chromium.launch({
-            headless:false
+            headless:true
         });
         const context = browser.newContext();
         const page =  await (await context).newPage();
@@ -94,27 +94,28 @@ describe('Launch Browser', () => {
         send1(productname);
         console.log(await page.locator('#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(4) > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20 > div > div.a-section.a-spacing-none.a-spacing-top-micro.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-whole').textContent());
         console.log(await page.locator('#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(4) > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20 > div > div.a-section.a-spacing-none.a-spacing-top-micro.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-fraction').textContent());
-    })
+        await browser.close();
+      })
 
-    // xtest ('Recorded script',async () => {
-    //     const browser = await chromium.launch({
-    //         headless:false
-    //     });
-    //     const context = browser.newContext();
-    //     const page =  await (await context).newPage();
-    //     await page.goto('https://letcode.in/');
-    //     console.log(await page.locator('p.subtitle:nth-child(2)').textContent());
-    //     await page.getByRole('link', { name: 'Log in' }).click();
-    //     await page.getByRole('textbox', { name: 'Enter registered email' }).click();
-    //     await page.getByRole('textbox', { name: 'Enter registered email' }).fill('hillo12305@gmail.com');
+    test ('Recorded script',async () => {
+        const browser = await chromium.launch({
+            headless:true
+        });
+        const context = browser.newContext();
+        const page =  await (await context).newPage();
+        await page.goto('https://letcode.in/');
+        console.log(await page.locator('p.subtitle:nth-child(2)').textContent());
+        await page.getByRole('link', { name: 'Log in' }).click();
+        await page.getByRole('textbox', { name: 'Enter registered email' }).click();
+        await page.getByRole('textbox', { name: 'Enter registered email' }).fill('hillo12305@gmail.com');
         
-    //     await page.getByPlaceholder('Enter password').click();
-    //     await page.getByPlaceholder('Enter password').fill('hello123!');
-    //     await page.getByRole('button', { name: 'LOGIN' }).click();
-    //     await page.getByRole('button', { name: 'Close' }).click();
-    //     await page.getByRole('link', { name: 'Sign out' }).click();
-    //     await browser.close();
-    // })
+        await page.getByPlaceholder('Enter password').click();
+        await page.getByPlaceholder('Enter password').fill('hello123!');
+        await page.getByRole('button', { name: 'LOGIN' }).click();
+        await page.getByRole('button', { name: 'Close' }).click();
+        await page.getByRole('link', { name: 'Sign out' }).click();
+        await browser.close();
+    })
 
     // //launch
     // xtest ('Open Letcode', async() =>{
