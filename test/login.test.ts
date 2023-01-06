@@ -121,7 +121,7 @@ describe('Launch Browser', () => {
 
     test('test', async () => {
       const browser = await chromium.launch({
-        headless:false
+        headless:true
     });
     const context = browser.newContext();
     const page =  await (await context).newPage();
