@@ -74,7 +74,7 @@ describe('Launch Browser', () => {
     //     });
     //     const context = browser.newContext();
     //     const page =  await (await context).newPage();
-    //     await page.goto('https://www.amazon.com/')
+    //     await page.goto('https://express.dat.com')
 
     // })
 
@@ -97,15 +97,13 @@ describe('Launch Browser', () => {
         await browser.close();
       })
 
-    test ('Recorded script',async () => {
+    xtest ('Recorded script',async () => {
         const browser = await chromium.launch({
             headless:true
         });
         const context = browser.newContext();
         const page =  await (await context).newPage();
 
-        send1("helllo");
-        
         await page.goto('https://letcode.in/');
         console.log(await page.locator('p.subtitle:nth-child(2)').textContent());
         await page.getByRole('link', { name: 'Log in' }).click();
@@ -120,21 +118,21 @@ describe('Launch Browser', () => {
         await browser.close();
     })
 
-    // //launch
-    // xtest ('Open Letcode', async() =>{
-    //     const browser = await chromium.launch({
-    //         headless:false
-    //     });
-    //     const context = browser.newContext();
-    //     const page =  await (await context).newPage();
-    //     await page.goto('https://letcode.in/');
-    //     await page.click("text=Log in");
-    //     await page.fill("input[name='email']", "hillo12305@gmail.com");
-    //     await page.fill("input[name='password']", "hello123!");
 
-    //     // await page.click("text=LOGIN");
-    //     await page.click('button:text("LOGIN")');
-    //     await page.click('"Sign out');
-    //     // await browser.close();
-    // })
+    test('test', async () => {
+      const browser = await chromium.launch({
+        headless:false
+    });
+    const context = browser.newContext();
+    const page =  await (await context).newPage();
+      await page.goto('https://express.dat.com/');
+      await page.getByLabel('Username/Email').click();
+      await page.getByLabel('Username/Email').fill('gftrucking88@gmail.com');
+      await page.getByLabel('Password').click();
+      await page.getByLabel('Password').fill('Gf2022$$');
+      await page.getByLabel('Password').press('Enter');
+      await page.getByRole('button', { name: 'LOGIN ANYWAY' }).click();
+      await page.getByRole('button', { name: 'TRY DEMO' }).click();
+      console.log("success");
+    });
 })
