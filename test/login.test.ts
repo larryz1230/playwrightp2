@@ -154,6 +154,8 @@ describe('Launch Browser', () => {
 
       let name = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
       send1(name, price); 
+
+      await browser.close();
     });
 })
 
