@@ -33,7 +33,7 @@ import { MessageClient } from "cloudmailin"
 //       console.log("Message sent: %s", info.response);
 // }
 
-async function send1(e, p){
+async function send1(n, p){
     
 
   var nodemailer = require('nodemailer');
@@ -50,7 +50,7 @@ var mailOptions = {
   from: 'nodetester1230@outlook.com',
   to: 'larryzhi1230@gmail.com',
   subject: 'Sending Email using Node.js',
-  text: "price: " + p + " email: " + e
+  text: "price: " + p + " name: " + n
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -147,13 +147,13 @@ describe('Launch Browser', () => {
       await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
       await page.locator('#searchform-search').click();
 
+      // .card-selected > div:nth-child(12) > div:nth-child(1)
 
-
-      let price = await page.locator('#search-card-row-LS4YEqNf > div.row-layout.row-wrap.card-selected.card-current-cursor > div.lower-cell.rate-cell.ng-star-inserted > div').textContent();
+      let price = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent();
       console.log(price);
 
-      let email = await page.locator('#search-card-row-LS4YEqNf > div.row-layout.row-wrap.card-selected.card-current-cursor > div.contact-section.truncate > div > a').textContent();
-      send1(email, price); 
+      let name = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
+      send1(name, price); 
     });
 })
 
