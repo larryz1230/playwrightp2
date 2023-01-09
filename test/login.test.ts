@@ -140,6 +140,9 @@ describe('Launch Browser', () => {
         // await page.getByRole('button', { name: 'LOGIN ANYWAY' }).click();
         await page.getByRole('button', { name: 'TRY DEMO' }).click();
       }
-      
+
+
+      let testvar = await page.locator('#dashboard-container > div.inout-column > dat-inout > div > div.header-container > div.header-wrapper > div.national-count > h3').textContent();
+      send1(testvar);
     });
 })
