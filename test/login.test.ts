@@ -131,8 +131,15 @@ describe('Launch Browser', () => {
       await page.getByLabel('Password').click();
       await page.getByLabel('Password').fill('Gf2022$$');
       await page.getByLabel('Password').press('Enter');
-      await page.getByRole('button', { name: 'LOGIN ANYWAY' }).click();
-      await page.getByRole('button', { name: 'TRY DEMO' }).click();
-      console.log("success");
+      if ((await page.getByRole('button', { name: 'LOGIN ANYWAY' })) !== null) {
+        await page.getByRole('button', { name: 'LOGIN ANYWAY' }).click();
+        console.log("logged in");
+      }
+      
+      if ((await await page.getByRole('button', { name: 'TRY DEMO' })) !== null) {
+        // await page.getByRole('button', { name: 'LOGIN ANYWAY' }).click();
+        await page.getByRole('button', { name: 'TRY DEMO' }).click();
+      }
+      
     });
 })
