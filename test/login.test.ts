@@ -142,20 +142,50 @@ describe('Launch Browser', () => {
         console.log("clicked");
       }
 
+
       await page.getByLabel('Origin').click();
-      await page.getByRole('combobox', { name: 'Origin' }).fill('san fran');
-      await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
-      await page.locator('#searchform-search').click();
+  await page.getByRole('combobox', { name: 'Origin' }).fill('Hayward');
+  await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
+  await page.getByLabel('Destination').click();
+  await page.getByRole('combobox', { name: 'Destination' }).fill('Los An');
+  await page.getByRole('combobox', { name: 'Destination' }).press('Enter');
+  await page.getByLabel('DH-D').click();
+  await page.getByLabel('DH-D').fill('100');
+  await page.getByLabel('DH-D').press('Enter');
+  await page.getByLabel('DH-O').click();
+  await page.getByLabel('DH-O').press('ArrowLeft');
+  await page.getByLabel('DH-O').press('ArrowLeft');
+  await page.getByLabel('DH-O').fill('50');
+  await page.getByLabel('DH-O').press('Meta+a');
+  await page.getByLabel('DH-O').fill('50');
+  await page.getByLabel('DH-O').press('Enter');
+  await page.locator('#mat-select-value-5').click();
+  await page.getByRole('option', { name: 'Containers C' }).locator('mat-pseudo-checkbox').click();
+  await page.locator('.cdk-overlay-backdrop').click();
+  await page.locator('#searchform-search').click();
 
-      // .card-selected > div:nth-child(12) > div:nth-child(1)
+      // await page.getByLabel('Origin').click();
+      // await page.getByRole('combobox', { name: 'Origin' }).fill('san fran');
+      // await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
+      // await page.locator('#searchform-search').click();
 
-      let price = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent();
+      // // .card-selected > div:nth-child(12) > div:nth-child(1)
+      // #detailsPortalHost
+
+      let price = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent(); 
+      // let price = await page.locator('#detailsPortalHost').textContent();
       console.log(price);
 
       let name = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
+      console.log(name);
       send1(name, price); 
 
-      await browser.close();
+
+
+
+  
+
+      // await browser.close();
     });
 })
 
