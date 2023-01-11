@@ -33,7 +33,7 @@ import { MessageClient } from "cloudmailin"
 //       console.log("Message sent: %s", info.response);
 // }
 
-async function send1(n, p){
+async function send1(n, p, n1, p1, r1, r2){
     
 
   var nodemailer = require('nodemailer');
@@ -50,7 +50,7 @@ var mailOptions = {
   from: 'nodetester1230@outlook.com',
   to: 'larryzhi1230@gmail.com',
   subject: 'Sending Email using Node.js',
-  text: "price: " + p + " name: " + n
+  text: r1 + " price: " + p + " name: " + n + '\n' + r2 + " price back: " + p1 + " name back: " + n1
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -79,49 +79,11 @@ describe('Launch Browser', () => {
     // })
 
 
-    xtest ("amazon", async () => {
-        const browser = await chromium.launch({
-            headless:true
-        });
-        const context = browser.newContext();
-        const page =  await (await context).newPage();
-        await page.goto('https://amazon.com');
-        await page.getByRole('textbox', { name: 'Search' }).click();
-        await page.getByRole('textbox', { name: 'Search' }).fill('iphone 14 phone');
-        await page.getByRole('textbox', { name: 'Search' }).press('Enter');
-        // await page.getByRole('listitem', { name: 'Apple' }).getByRole('link', { name: 'Apple' }).click();
-        let productname = await page.locator('#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(5) > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.s-list-col-right > div > div > div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style > h2 > a > span').textContent();
-        // send1(productname);
-        console.log(await page.locator('#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(4) > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20 > div > div.a-section.a-spacing-none.a-spacing-top-micro.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-whole').textContent());
-        console.log(await page.locator('#search > div.s-desktop-width-max.s-desktop-content.s-opposite-dir.sg-row > div.s-matching-dir.sg-col-16-of-20.sg-col.sg-col-8-of-12.sg-col-12-of-16 > div > span.rush-component.s-latency-cf-section > div.s-main-slot.s-result-list.s-search-results.sg-row > div:nth-child(4) > div > div > div > div > div > div.sg-col.sg-col-4-of-12.sg-col-8-of-16.sg-col-12-of-20.s-list-col-right > div > div > div.sg-row > div.sg-col.sg-col-4-of-12.sg-col-4-of-16.sg-col-4-of-20 > div > div.a-section.a-spacing-none.a-spacing-top-micro.s-price-instructions-style > div > a > span > span:nth-child(2) > span.a-price-fraction').textContent());
-        await browser.close();
-      })
+  
 
-    xtest ('Recorded script',async () => {
-        const browser = await chromium.launch({
-            headless:true
-        });
-        const context = browser.newContext();
-        const page =  await (await context).newPage();
-
-        await page.goto('https://letcode.in/');
-        console.log(await page.locator('p.subtitle:nth-child(2)').textContent());
-        await page.getByRole('link', { name: 'Log in' }).click();
-        await page.getByRole('textbox', { name: 'Enter registered email' }).click();
-        await page.getByRole('textbox', { name: 'Enter registered email' }).fill('hillo12305@gmail.com');
-        
-        await page.getByPlaceholder('Enter password').click();
-        await page.getByPlaceholder('Enter password').fill('hello123!');
-        await page.getByRole('button', { name: 'LOGIN' }).click();
-        await page.getByRole('button', { name: 'Close' }).click();
-        await page.getByRole('link', { name: 'Sign out' }).click();
-        await browser.close();
-    })
-
-
-    test('test', async () => {
+    test('to', async () => {
       const browser = await chromium.launch({
-        headless:true
+        headless: true
     });
     const context = browser.newContext();
     const page =  await (await context).newPage();
@@ -143,7 +105,7 @@ describe('Launch Browser', () => {
       }
 
 
-      await page.getByLabel('Origin').click();
+  await page.getByLabel('Origin').click();
   await page.getByRole('combobox', { name: 'Origin' }).fill('Hayward');
   await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
   await page.getByLabel('Destination').click();
@@ -154,9 +116,6 @@ describe('Launch Browser', () => {
   await page.getByLabel('DH-D').press('Enter');
   await page.getByLabel('DH-O').click();
   await page.getByLabel('DH-O').press('ArrowLeft');
-  await page.getByLabel('DH-O').press('ArrowLeft');
-  await page.getByLabel('DH-O').fill('50');
-  await page.getByLabel('DH-O').press('Meta+a');
   await page.getByLabel('DH-O').fill('50');
   await page.getByLabel('DH-O').press('Enter');
   await page.locator('#mat-select-value-5').click();
@@ -172,22 +131,58 @@ describe('Launch Browser', () => {
       // // .card-selected > div:nth-child(12) > div:nth-child(1)
       // #detailsPortalHost
 
+      
+
       let price = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent(); 
       // let price = await page.locator('#detailsPortalHost').textContent();
       console.log(price);
 
       let name = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
       console.log(name);
-      send1(name, price); 
+      // send1(name, price); 
+
+      let results1 = await page.locator('#search-cards-title').textContent();
+      console.log(results1);
+
+      await page.screenshot({ path: 'screenshot.png' });
+
+      await page.getByRole('button', { name: 'NEW SEARCH' }).click();
+
+      await page.getByRole('combobox', { name: 'Origin' }).fill('Los An');
+      await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
+      await page.getByLabel('Destination').click();
+      await page.getByRole('combobox', { name: 'Destination' }).fill('Hayward');
+      await page.getByRole('combobox', { name: 'Destination' }).press('Enter');
+      await page.getByLabel('DH-D').click();
+      await page.getByLabel('DH-D').fill('50');
+      await page.getByLabel('DH-D').press('Enter');
+      await page.getByLabel('DH-O').click();
+      await page.getByLabel('DH-O').press('ArrowLeft');
+      await page.getByLabel('DH-O').fill('100');
+      await page.locator('#searchform-search').click();
+
+      const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+      await delay(2000);
 
 
+      let price1 = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent(); 
+      // let price = await page.locator('#detailsPortalHost').textContent();
+      console.log(price1);
 
+      let name1 = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
+      console.log(name1);
 
-  
+      let results2 = await page.locator('#search-cards-title').textContent();
+      console.log(results2);
 
-      // await browser.close();
+      send1 (name, price, name1, price1, results1, results2);
+      await page.screenshot({ path: 'screenshot1.png' });
+      await browser.close();
     });
+
+    
+    
 })
 
-
+//todo: take snapshot of searches
 // npx playwright codegen https://truckersedge.dat.com
