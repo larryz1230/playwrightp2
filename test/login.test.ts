@@ -144,7 +144,7 @@ describe('Launch Browser', () => {
       let results1 = await page.locator('#search-cards-title').textContent();
       console.log(results1);
 
-      await page.screenshot({ path: 'screenshot.png' });
+      // await page.screenshot({ path: 'screenshot.png' });
 
       await page.getByRole('button', { name: 'NEW SEARCH' }).click();
 
@@ -176,7 +176,7 @@ describe('Launch Browser', () => {
       console.log(results2);
 
       send1 (name, price, name1, price1, results1, results2);
-      await page.screenshot({ path: 'screenshot1.png' });
+      // await page.screenshot({ path: 'screenshot1.png' });
       await browser.close();
     });
 
