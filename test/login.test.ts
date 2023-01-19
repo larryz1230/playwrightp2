@@ -4,35 +4,6 @@ import * as nodemailer from 'nodemailer';
 import { MessageClient } from "cloudmailin"
 
 
-// async function send() {
-//     const hostname = "smtgmailp..com";
-//     const username= "hillo12305";
-//     const password= "hihello1";
-  
-//     const transporter = nodemailer.createTransport({
-//       host: hostname,
-//       port: 587,
-//       secure: false,
-//       requireTLS: true,
-//       auth: {
-//         user: username,
-//         pass: password,
-//       },
-//       logger: true
-//     });
-
-//     const info = await transporter.sendMail({
-//         from: '"Larry" <hillo12305@gmail.com>',
-//         to: "larryzhi1230@gmail.com",
-//         subject: "Hello from node",
-//         text: "Hello world?",
-//         html: "<strong>Hello world?</strong>",
-//         headers: { 'x-myheader': 'test header' }
-//       });
-    
-//       console.log("Message sent: %s", info.response);
-// }
-
 async function send1(n, p, n1, p1, r1, r2){
     
 
@@ -104,6 +75,8 @@ describe('Launch Browser', () => {
         console.log("clicked");
       }
 
+    let date: Date = new Date();  
+    let dstring = (date.getMonth()+1 + "/" + (date.getDate()+1) + "/" + date.getFullYear()); 
 
   await page.getByLabel('Origin').click();
   await page.getByRole('combobox', { name: 'Origin' }).fill('Hayward');
@@ -148,6 +121,14 @@ describe('Launch Browser', () => {
 
       await page.getByRole('button', { name: 'NEW SEARCH' }).click();
 
+      await page.getByLabel('Start date').click();
+      await page.getByLabel('Start date').press('Meta+a');
+      await page.getByLabel('Start date').fill(dstring);
+
+      await page.getByLabel('End date').click();
+      await page.getByLabel('End date').press('Meta+a');
+      await page.getByLabel('End date').fill(dstring);
+
       await page.getByRole('combobox', { name: 'Origin' }).fill('Los An');
       await page.getByRole('combobox', { name: 'Origin' }).press('Enter');
       await page.getByLabel('Destination').click();
@@ -176,7 +157,7 @@ describe('Launch Browser', () => {
       console.log(results2);
 
       send1 (name, price, name1, price1, results1, results2);
-      // await page.screenshot({ path: 'screenshot1.png' });
+      await page.screenshot({ path: 'screenshot1.png' });
       await browser.close();
     });
 
