@@ -4,7 +4,7 @@ import * as nodemailer from 'nodemailer';
 import { MessageClient } from "cloudmailin"
 
 
-async function send1(n, p, n1, p1, r1, r2){
+async function send1(n, p, n1, p1, r1, r2, d1,d2){
     
 
   var nodemailer = require('nodemailer');
@@ -17,11 +17,16 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+var maillist = [
+  'larryzhi1230@gmail.com',
+  'hillo12305@gmail.com',
+];
+
 var mailOptions = {
   from: 'nodetester1230@outlook.com',
-  to: 'larryzhi1230@gmail.com',
+  to: maillist,
   subject: 'Sending Email using Node.js',
-  text: r1 + " price: " + p + " name: " + n + '\n' + r2 + " price back: " + p1 + " name back: " + n1
+  text: "date: " + d1 + " " + r1 + " price: " + p + " name: " + n + '\n' + "date: " + d2 + " " + r2 + " price back: " + p1 + " name back: " + n1
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -156,7 +161,8 @@ describe('Launch Browser', () => {
       let results2 = await page.locator('#search-cards-title').textContent();
       console.log(results2);
 
-      send1 (name, price, name1, price1, results1, results2);
+      let dstringcurr = (date.getMonth()+1 + "/" + (date.getDate()) + "/" + date.getFullYear()); 
+      send1 (name, price, name1, price1, results1, results2, dstringcurr, dstring);
       await page.screenshot({ path: 'screenshot1.png' });
       await browser.close();
     });
