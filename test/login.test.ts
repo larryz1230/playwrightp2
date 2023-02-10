@@ -4,7 +4,7 @@ import * as nodemailer from 'nodemailer';
 import { MessageClient } from "cloudmailin"
 
 
-async function send1(n, p, n1, p1, r1, r2, d1,d2){
+async function send1(n, p, n1, p1, r1, r2, d1,d2, c1,c2){
     
 
   var nodemailer = require('nodemailer');
@@ -20,13 +20,16 @@ var transporter = nodemailer.createTransport({
 var maillist = [
   'larryzhi1230@gmail.com',
   'hillo12305@gmail.com',
+  // 'Karlgf2016@gmail.com',
+  // 'ndgui2015@gmail.com',
+  // 'mtlzhen@gmail.com',
 ];
 
 var mailOptions = {
   from: 'nodetester1230@outlook.com',
   to: maillist,
   subject: 'Sending Email using Node.js',
-  text: "date: " + d1 + " " + r1 + " price: " + p + " name: " + n + '\n' + "date: " + d2 + " " + r2 + " price back: " + p1 + " name back: " + n1
+  text: "SOUTH (hayward->LA): date: " + d1 + " " + r1 + " price: " + p + " name: " + n + "contact: " + c1 + '\n' + "NORTH (la->hayward) date: " + d2 + " " + r2 + " price back: " + p1 + " name back: " + n1 + "contact: " + c2
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -81,7 +84,9 @@ describe('Launch Browser', () => {
       }
 
     let date: Date = new Date();  
-    let dstring = (date.getMonth()+1 + "/" + (date.getDate()+1) + "/" + date.getFullYear()); 
+    let dstringcurr = (date.getMonth()+1 + "/" + (date.getDate()) + "/" + date.getFullYear()); 
+    date.setDate(date.getDate() + 1)
+    let dstring = (date.getMonth()+1 + "/" + (date.getDate()) + "/" + date.getFullYear()); 
 
   await page.getByLabel('Origin').click();
   await page.getByRole('combobox', { name: 'Origin' }).fill('Hayward');
@@ -113,16 +118,19 @@ describe('Launch Browser', () => {
 
       let price = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent(); 
       // let price = await page.locator('#detailsPortalHost').textContent();
-      console.log(price);
+
 
       let name = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
-      console.log(name);
+
       // send1(name, price); 
 
       let results1 = await page.locator('#search-cards-title').textContent();
       console.log(results1);
 
-      // await page.screenshot({ path: 'screenshot.png' });
+      let contact = await page.locator('.card-selected > div:nth-child(11) > div:nth-child(2) > a:nth-child(1)').textContent();
+      console.log("contact: " + contact);
+
+      await page.screenshot({ path: 'screenshot.png' });
 
       await page.getByRole('button', { name: 'NEW SEARCH' }).click();
 
@@ -153,16 +161,20 @@ describe('Launch Browser', () => {
 
       let price1 = await page.locator('.card-selected > div:nth-child(12) > div:nth-child(1)').textContent(); 
       // let price = await page.locator('#detailsPortalHost').textContent();
-      console.log(price1);
+ 
 
       let name1 = await page.locator('.card-selected > div:nth-child(11) > a:nth-child(1) > span:nth-child(1)').textContent();
-      console.log(name1);
+
 
       let results2 = await page.locator('#search-cards-title').textContent();
-      console.log(results2);
 
-      let dstringcurr = (date.getMonth()+1 + "/" + (date.getDate()) + "/" + date.getFullYear()); 
-      send1 (name, price, name1, price1, results1, results2, dstringcurr, dstring);
+
+
+      let contact1 = await page.locator('.card-selected > div:nth-child(11) > div:nth-child(2) > a:nth-child(1)').textContent();
+      console.log("contact: " + contact1);
+
+      
+      send1 (name, price, name1, price1, results1, results2, dstringcurr, dstring, contact, contact1);
       await page.screenshot({ path: 'screenshot1.png' });
       await browser.close();
     });
